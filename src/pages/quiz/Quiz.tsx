@@ -23,10 +23,11 @@ const Quiz = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<AnswersMap>({});
   const [showResult, setShowResult] = useState(false);
-  const handleAnswerSelect = (selectedIndex: number) => {
+
+  const handleAnswerSelect = (selectedIndex: number, questionId: number) => {
     setAnswers((prev) => ({
       ...prev,
-      [currentQuestion.id]: selectedIndex,
+      [questionId]: selectedIndex,
     }));
   };
 
@@ -115,12 +116,13 @@ const Quiz = () => {
 
             return (
               <button
+                type="button"
                 key={index}
-                onClick={() => handleAnswerSelect(index)}
-                className={`w-full p-4 rounded border transition ${
+                onClick={() => handleAnswerSelect(index, currentQuestion.id)}
+                className={`w-full p-4 rounded border transition cursor-pointer text-left ${
                   isSelected
-                    ? "border-primary-600 bg-primary-50"
-                    : "border-gray-300 hover:border-primary-400"
+                    ? "border-black border-2 font-medium"
+                    : "border-gray-300 hover:border-primary-400 hover:bg-gray-50"
                 }`}
               >
                 {option}
